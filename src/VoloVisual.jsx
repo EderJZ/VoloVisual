@@ -426,11 +426,11 @@ function Hero() {
         </h1>
 
         <p className="anim-fade-up-2" style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(1.1rem, 3vw, 2.2rem)", fontWeight: 400, letterSpacing: "0.35em", color: gray, textTransform: "uppercase", marginBottom: 48 }}>
-          Além do Horizonte
+          Cinematografia Aérea
         </p>
 
         <p className="anim-fade-up-3" style={{ fontSize: "0.9rem", letterSpacing: "0.08em", color: gray, maxWidth: 460, margin: "0 auto 56px", lineHeight: 1.9 }}>
-          Captamos o que os olhos não alcançam. Filmagens aéreas e produções cinematográficas com equipamentos de última geração e visão artística.
+          Capturamos o mundo de perspectivas que nenhum outro equipamento alcança. Filmagem em 4K e 8K com drones de alta performance.
         </p>
 
         <div className="anim-fade-up-4" style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
@@ -716,36 +716,82 @@ function Processo() {
   );
 }
 
-/* Depoimentos */
-const depoimentos = [
-  { q: "A qualidade das imagens aéreas superou todas as nossas expectativas. A equipe da Volo Visual transformou nosso lançamento imobiliário em uma experiência visual extraordinária.", name: "Carlos Andrade", role: "Diretor Comercial — Construtora Andrade", initials: "CA" },
-  { q: "Contratamos para a cobertura do nosso festival e o resultado foi incrível. As tomadas aéreas capturaram a energia do evento de um ângulo que jamais conseguiríamos de outra forma.", name: "Marina Figueiredo", role: "Produtora — Cultura Viva Eventos", initials: "MF" },
-  { q: "Profissionalismo do início ao fim. Da aprovação das rotas de voo à entrega em 4K, tudo foi impecável. Com certeza voltaremos a trabalhar juntos em nossos próximos projetos.", name: "Ricardo Lemos", role: "CEO — Studio Lemos Filmes", initials: "RL" },
+/* Videos */
+// ══════════════════════════════════════════════════════
+//  COMO USAR:
+//  Substitua as URLs abaixo pelos seus links do YouTube
+//  ou Vimeo. Exemplos:
+//    YouTube: "https://www.youtube.com/embed/SEU_VIDEO_ID"
+//    Vimeo:   "https://player.vimeo.com/video/SEU_VIDEO_ID"
+//
+//  Também troque "Título do Vídeo 1" e "Descrição..." pelo
+//  nome real de cada projeto.
+// ══════════════════════════════════════════════════════
+const videos = [
+  {
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // ← troque pela URL do seu vídeo
+    title: "Título do Vídeo 1",
+    desc: "Descrição breve do projeto — localização, tipo de produção ou cliente.",
+    label: "Produção Aérea",
+  },
+  {
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // ← troque pela URL do seu vídeo
+    title: "Título do Vídeo 2",
+    desc: "Descrição breve do projeto — localização, tipo de produção ou cliente.",
+    label: "Cinematografia",
+  },
 ];
 
-function Depoimentos() {
+function Videos() {
   return (
     <section id="depoimentos" style={{ padding: "140px 60px", background: dark2, overflow: "hidden" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ textAlign: "center" }}>
-          <SectionLabel centered>O Que Dizem</SectionLabel>
-          <SectionTitle centered delay={1}>Nossos <span style={{ color: gold }}>Clientes</span></SectionTitle>
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: 80 }}>
+          <SectionLabel centered>Nosso Trabalho</SectionLabel>
+          <SectionTitle centered delay={1}>Produções em <span style={{ color: gold }}>Destaque</span></SectionTitle>
+          <p className="reveal reveal-delay-2" style={{ fontSize: "0.88rem", color: gray, lineHeight: 1.9, maxWidth: 480, margin: "0 auto" }}>
+            Veja como transformamos visões em produções cinematográficas aéreas únicas.
+          </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, marginTop: 80 }} className="dep-grid-resp">
-          {depoimentos.map((d, i) => (
-            <div key={i} className={`depoimento-card reveal${i > 0 ? ` reveal-delay-${i}` : ""}`}
-              style={{ padding: 40, border: "1px solid rgba(201,168,76,0.1)", position: "relative", transition: "border-color 0.3s, background 0.3s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(201,168,76,0.25)"; e.currentTarget.style.background = "rgba(201,168,76,0.02)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(201,168,76,0.1)"; e.currentTarget.style.background = ""; }}
-            >
-              <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "3rem", color: gold, opacity: 0.2, lineHeight: 1, marginBottom: 20 }}>"</div>
-              <p style={{ fontSize: "0.85rem", lineHeight: 2, color: gray, fontStyle: "italic", marginBottom: 28 }}>{d.q}</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <div style={{ width: 44, height: 44, borderRadius: "50%", background: goldDim, border: "1px solid rgba(201,168,76,0.3)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Cinzel', serif", fontSize: "0.75rem", color: gold, flexShrink: 0 }}>{d.initials}</div>
-                <div>
-                  <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.8rem", letterSpacing: "0.08em", marginBottom: 4 }}>{d.name}</p>
-                  <p style={{ fontSize: "0.7rem", color: gray, letterSpacing: "0.05em" }}>{d.role}</p>
+
+        {/* Video grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }} className="video-grid-resp">
+          {videos.map((v, i) => (
+            <div key={i} className={`reveal${i > 0 ? " reveal-delay-1" : ""}`}>
+              {/* Video frame */}
+              <div style={{ position: "relative", border: "1px solid rgba(201,168,76,0.15)", background: dark3 }}>
+                {/* Corner accents */}
+                <div style={{ position: "absolute", top: -1, left: -1, width: 28, height: 28, borderTop: `1px solid ${gold}`, borderLeft: `1px solid ${gold}`, zIndex: 2, pointerEvents: "none" }} />
+                <div style={{ position: "absolute", bottom: -1, right: -1, width: 28, height: 28, borderBottom: `1px solid ${gold}`, borderRight: `1px solid ${gold}`, zIndex: 2, pointerEvents: "none" }} />
+
+                {/* 16:9 iframe */}
+                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden" }}>
+                  <iframe
+                    src={v.url}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{
+                      position: "absolute", top: 0, left: 0,
+                      width: "100%", height: "100%",
+                      border: "none",
+                    }}
+                  />
                 </div>
+              </div>
+
+              {/* Info below video */}
+              <div style={{ padding: "24px 4px 0" }}>
+                <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: 10 }}>
+                  {v.label}
+                </p>
+                <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.1rem", letterSpacing: "0.05em", marginBottom: 10 }}>
+                  {v.title}
+                </h3>
+                <p style={{ fontSize: "0.82rem", color: gray, lineHeight: 1.8 }}>
+                  {v.desc}
+                </p>
               </div>
             </div>
           ))}
@@ -901,6 +947,7 @@ const RESPONSIVE_CSS = `
     .sobre-grid { grid-template-columns: 1fr !important; gap: 50px !important; }
     .servicos-grid-resp { grid-template-columns: 1fr !important; }
     .dep-grid-resp { grid-template-columns: 1fr !important; }
+    .video-grid-resp { grid-template-columns: 1fr !important; }
     .contato-grid-resp { grid-template-columns: 1fr !important; gap: 50px !important; }
     .footer-grid-resp { grid-template-columns: 1fr 1fr !important; gap: 30px !important; }
     .processo-steps { grid-template-columns: 1fr 1fr !important; }
@@ -943,7 +990,7 @@ export default function VoloVisual() {
       <Servicos />
       <Portfolio />
       <Processo />
-      <Depoimentos />
+      <Videos />
       <Contato />
       <Footer />
     </div>
