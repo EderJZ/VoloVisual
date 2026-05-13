@@ -710,42 +710,18 @@ function Sobre() {
       <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 100, alignItems: "center" }} className="sobre-grid">
         {/* Visual */}
         <div className="reveal" style={{ position: "relative" }}>
-          <div style={{ aspectRatio: "4/5", background: dark3, border: "1px solid rgba(201,168,76,0.15)", position: "relative", overflow: "hidden" }}>
+          <div style={{ aspectRatio: "4/5", border: "1px solid rgba(201,168,76,0.15)", position: "relative", overflow: "hidden" }}>
+            <img
+              src="/src/assets/img01.webp"
+              alt="Volo Visual em operação"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
             <div style={{ position: "absolute", top: -1, left: -1, width: 60, height: 60, borderTop: `2px solid ${gold}`, borderLeft: `2px solid ${gold}` }} />
             <div style={{ position: "absolute", bottom: -1, right: -1, width: 60, height: 60, borderBottom: `2px solid ${gold}`, borderRight: `2px solid ${gold}` }} />
-            <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: 0.12 }}>
-              <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
-                <circle cx="100" cy="100" r="16" stroke={gold} strokeWidth="1.5"/>
-                <line x1="84" y1="100" x2="20" y2="100" stroke={gold} strokeWidth="1.5"/>
-                <line x1="116" y1="100" x2="180" y2="100" stroke={gold} strokeWidth="1.5"/>
-                <line x1="100" y1="84" x2="100" y2="20" stroke={gold} strokeWidth="1.5"/>
-                <line x1="100" y1="116" x2="100" y2="180" stroke={gold} strokeWidth="1.5"/>
-                <circle cx="20" cy="100" r="14" stroke={gold} strokeWidth="1.5"/>
-                <circle cx="180" cy="100" r="14" stroke={gold} strokeWidth="1.5"/>
-                <circle cx="100" cy="20" r="14" stroke={gold} strokeWidth="1.5"/>
-                <circle cx="100" cy="180" r="14" stroke={gold} strokeWidth="1.5"/>
-                <ellipse cx="100" cy="100" rx="44" ry="44" stroke={gold} strokeWidth="0.5" strokeDasharray="4 4"/>
-              </svg>
-            </div>
-            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" style={{ position: "absolute", inset: 0, opacity: 0.3 }}>
-              <defs>
-                <radialGradient id="rg1" cx="40%" cy="60%">
-                  <stop offset="0%" stopColor={gold} stopOpacity="0.3"/>
-                  <stop offset="100%" stopColor="#000" stopOpacity="0"/>
-                </radialGradient>
-              </defs>
-              <rect width="400" height="500" fill="#0a0a0a"/>
-              <rect x="0" y="0" width="400" height="500" fill="url(#rg1)"/>
-              <line x1="0" y1="250" x2="400" y2="250" stroke={gold} strokeWidth="0.5" opacity="0.3"/>
-              <line x1="200" y1="0" x2="200" y2="500" stroke={gold} strokeWidth="0.5" opacity="0.3"/>
-              <circle cx="200" cy="250" r="80" stroke={gold} strokeWidth="0.5" fill="none" opacity="0.2"/>
-              <circle cx="200" cy="250" r="40" stroke={gold} strokeWidth="0.5" fill="none" opacity="0.3"/>
-              <circle cx="200" cy="250" r="8" fill={gold} opacity="0.4"/>
-            </svg>
           </div>
           {/* Stat badge */}
           <div className="sobre-badge" style={{ position: "absolute", bottom: 30, right: -30, background: dark, border: "1px solid rgba(201,168,76,0.2)", padding: "24px 30px" }}>
-            <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "2.5rem", color: gold, lineHeight: 1 }}>+120</div>
+            <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "2.5rem", color: gold, lineHeight: 1 }}></div>
             <div style={{ fontSize: "0.7rem", letterSpacing: "0.1em", color: gray, marginTop: 6 }}>Projetos Realizados</div>
           </div>
         </div>
