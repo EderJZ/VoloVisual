@@ -983,20 +983,47 @@ function Videos() {
 /* Contato */
 function Contato() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ nome: "", empresa: "", email: "", servico: "", mensagem: "" });
+  const [form, setForm] = useState({
+    nome: "",
+    empresa: "",
+    email: "",
+    servico: "",
+    mensagem: "Olá! Gostaria de solicitar um orçamento.",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const numero = "554198276136"; // ← número whatsapp
+
+    const mensagem = `
+*Nova mensagem pelo site Volo Visual*
+
+*Nome:* ${form.nome}
+*Empresa:* ${form.empresa || "Não informado"}
+*E-mail:* ${form.email}
+*Serviço de interesse:* ${form.servico || "Não informado"}
+
+*Mensagem:*
+${form.mensagem}
+    `.trim();
+
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, "_blank");
+
     setSubmitted(true);
-    setTimeout(() => { setSubmitted(false); setForm({ nome: "", empresa: "", email: "", servico: "", mensagem: "" }); }, 3500);
+    setTimeout(() => {
+      setSubmitted(false);
+      setForm({ nome: "", empresa: "", email: "", servico: "", mensagem: "" });
+    }, 3500);
   };
 
   const inputStyle = { background: "transparent", border: "none", borderBottom: "1px solid rgba(201,168,76,0.2)", padding: "12px 0", fontFamily: "'Montserrat', sans-serif", fontSize: "0.88rem", color: white, outline: "none", transition: "border-color 0.3s", fontWeight: 300, width: "100%" };
   const labelStyle = { fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: gray };
 
   const contactInfos = [
-    { label: "E-mail", value: "contato@volovisual.com", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h12v10H3z" stroke={gold} strokeWidth="1"/><path d="M3 3l6 5 6-5" stroke={gold} strokeWidth="1"/></svg> },
-    { label: "Telefone / WhatsApp", value: "+55 (41) 99999-0000", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3c0 8 4 12 12 12l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z" stroke={gold} strokeWidth="1"/></svg> },
+    { label: "E-mail", value: "carlosvzm@gmail.com", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h12v10H3z" stroke={gold} strokeWidth="1"/><path d="M3 3l6 5 6-5" stroke={gold} strokeWidth="1"/></svg> },
+    { label: "Telefone / WhatsApp", value: "+55 41 9827-6136", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3c0 8 4 12 12 12l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z" stroke={gold} strokeWidth="1"/></svg> },
     { label: "Localização", value: "Curitiba, Paraná — Brasil", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="8" r="3" stroke={gold} strokeWidth="1"/><path d="M9 1C6 1 3 3.7 3 7c0 4 6 10 6 10s6-6 6-10c0-3.3-3-6-6-6z" stroke={gold} strokeWidth="1"/></svg> },
   ];
 
@@ -1025,7 +1052,15 @@ function Contato() {
 
         {/* Form */}
         <form className="reveal reveal-delay-2" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          {/* Nome + Empresa — empilha no mobile via classe */}
+          <div className="reveal reveal-delay-1" style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11 2C6.03 2 2 6.03 2 11c0 1.6.42 3.1 1.15 4.4L2 20l4.72-1.13A9 9 0 1 0 11 2z" stroke={gold} strokeWidth="1.2" fill="none"/>
+              <path d="M8 8.5c.2-.5.8-1.5 2-1.5s1.8.8 1.8 1.5c0 1.2-1.3 1.8-1.8 2.5-.3.5-.2 1-.2 1M11 15h.01" stroke={gold} strokeWidth="1.2" strokeLinecap="round"/>
+            </svg>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: gold }}>
+              Você será direcionado ao WhatsApp
+            </p>
+          </div>
           <div className="contato-form-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <label style={labelStyle}>Nome</label>
@@ -1044,12 +1079,17 @@ function Contato() {
             <label style={labelStyle}>Serviço de Interesse</label>
             <select className="volo-input" value={form.servico} onChange={(e) => setForm({ ...form, servico: e.target.value })} style={{ ...inputStyle, cursor: "pointer" }}>
               <option value="">Selecione um serviço</option>
-              {["Filmagem Aérea com Drone","Produção Cinematográfica","Fotografia Aérea","Mapeamento e Inspeção","Cobertura de Eventos","Pós-Produção e Color"].map(s => <option key={s}>{s}</option>)}
+              {["Filmagem Aérea com Drone","Produção Cinematográfica","Fotografia Aérea","Mapeamento e Inspeção","Cobertura de Eventos","Pós-Produção e Color","Outros"].map(s => <option key={s}>{s}</option>)}
             </select>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <label style={labelStyle}>Mensagem</label>
-            <textarea className="volo-input" placeholder="Descreva seu projeto..." value={form.mensagem} onChange={(e) => setForm({ ...form, mensagem: e.target.value })} style={{ ...inputStyle, resize: "none", height: 100 }} />
+            <textarea
+              className="volo-input"
+              value={form.mensagem}
+              onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+              style={{ ...inputStyle, resize: "none", height: 100 }}
+            />
           </div>
           <button
             type="submit"
@@ -1062,14 +1102,55 @@ function Contato() {
             onMouseEnter={(e) => { if (!submitted) { e.currentTarget.style.background = goldLight; e.currentTarget.style.transform = "translateY(-2px)"; } }}
             onMouseLeave={(e) => { if (!submitted) { e.currentTarget.style.background = gold; e.currentTarget.style.transform = ""; } }}
           >
-            {submitted ? "Mensagem Enviada!" : "Enviar Mensagem"}
+            {submitted ? "Redirecionando para WhatsApp ✓" : "Enviar Mensagem"}
           </button>
         </form>
       </div>
     </section>
   );
 }
+/* direcionar para WhatsApp */
+function WhatsAppButton() {
+  const handleClick = () => {
+    const el = document.querySelector("#contato");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
+  return (
+    <button
+      onClick={handleClick}
+      title="Fale conosco"
+      style={{
+        position: "fixed",
+        bottom: 32,
+        right: 32,
+        zIndex: 999,
+        width: 56,
+        height: 56,
+        borderRadius: "50%",
+        background: "#25D366",
+        border: "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: "0 4px 20px rgba(37,211,102,0.4)",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "scale(1.12)";
+        e.currentTarget.style.boxShadow = "0 6px 28px rgba(37,211,102,0.6)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "scale(1)";
+        e.currentTarget.style.boxShadow = "0 4px 20px rgba(37,211,102,0.4)";
+      }}
+    >
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="white">
+        <path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.76A13.93 13.93 0 0 0 16 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm7.3 19.3c-.3.85-1.77 1.63-2.43 1.7-.62.06-1.2.28-4.05-.85-3.4-1.37-5.58-4.83-5.75-5.05-.17-.22-1.37-1.82-1.37-3.48s.87-2.47 1.18-2.81c.3-.33.66-.42.88-.42l.63.01c.2 0 .48-.08.75.57.3.7 1.01 2.45 1.1 2.63.09.17.15.38.03.6-.12.23-.18.37-.35.57-.17.2-.36.45-.51.6-.17.17-.35.35-.15.68.2.33.88 1.45 1.88 2.35 1.29 1.15 2.38 1.5 2.72 1.67.33.17.53.14.72-.08.2-.23.85-.99 1.08-1.33.22-.33.45-.28.75-.17.3.11 1.9.9 2.23 1.06.33.17.55.25.63.39.08.14.08.8-.22 1.65z"/>
+      </svg>
+    </button>
+  );
+}
 /* Footer */
 function Footer() {
   const navLinks = ["Sobre", "Serviços", "Portfólio", "Processo", "Contato"];
@@ -1146,6 +1227,7 @@ export default function VoloVisual() {
   return (
     <div style={{ background: dark, color: white, minHeight: "100vh" }}>
       <CustomCursor />
+      <WhatsAppButton />
       <Navbar />
       <Hero />
       <Sobre />
