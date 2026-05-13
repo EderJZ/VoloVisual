@@ -98,17 +98,6 @@ git add .
 git commit -m "feat: descrição da mudança"
 git push
 ```
-
-### Convenção de commits
-
-| Prefixo | Uso |
-|---------|-----|
-| `feat:` | nova funcionalidade ou seção |
-| `fix:` | correção de bug |
-| `style:` | ajuste visual ou de CSS |
-| `content:` | atualização de texto, vídeo ou imagem |
-| `refactor:` | reorganização de código |
-
 ## Licença
 
 Projeto privado — todos os direitos reservados © 2025 Volo Visual.
