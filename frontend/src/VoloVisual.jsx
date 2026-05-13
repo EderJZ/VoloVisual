@@ -1023,7 +1023,7 @@ ${form.mensagem}
 
   const contactInfos = [
     { label: "E-mail", value: "carlosvzm@gmail.com", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h12v10H3z" stroke={gold} strokeWidth="1"/><path d="M3 3l6 5 6-5" stroke={gold} strokeWidth="1"/></svg> },
-    { label: "Telefone / WhatsApp", value: "+55 41 9827-6136", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3c0 8 4 12 12 12l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z" stroke={gold} strokeWidth="1"/></svg> },
+    { label: "Telefone / WhatsApp", value: "+55 41 99827-6136", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3c0 8 4 12 12 12l1-3-3-1-1 1c-2-1-4-3-5-5l1-1-1-3z" stroke={gold} strokeWidth="1"/></svg> },
     { label: "Localização", value: "Curitiba, Paraná — Brasil", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="8" r="3" stroke={gold} strokeWidth="1"/><path d="M9 1C6 1 3 3.7 3 7c0 4 6 10 6 10s6-6 6-10c0-3.3-3-6-6-6z" stroke={gold} strokeWidth="1"/></svg> },
   ];
 
@@ -1181,8 +1181,8 @@ function Footer() {
           <div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: gold, marginBottom: 20 }}>Contato</p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
-              <li><a href="mailto:contato@volovisual.com" style={linkStyle} onMouseEnter={e => e.target.style.color = white} onMouseLeave={e => e.target.style.color = gray}>contato@volovisual.com</a></li>
-              <li><a href="tel:+5541999990000" style={linkStyle} onMouseEnter={e => e.target.style.color = white} onMouseLeave={e => e.target.style.color = gray}>+55 (41) 99999-0000</a></li>
+              <li><a href="mailto:contato@volovisual.com" style={linkStyle} onMouseEnter={e => e.target.style.color = white} onMouseLeave={e => e.target.style.color = gray}>carlosvzm@gmail.com</a></li>
+              <li><a href="tel:+5541998276136" style={linkStyle} onMouseEnter={e => e.target.style.color = white} onMouseLeave={e => e.target.style.color = gray}>+55 (41) 99827-6136</a></li>
               <li><span style={{ ...linkStyle, cursor: "default" }}>Curitiba, PR — Brasil</span></li>
             </ul>
           </div>
