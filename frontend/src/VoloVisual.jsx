@@ -52,6 +52,10 @@ const GLOBAL_CSS = `
     0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
     50%       { opacity: 1;   transform: scaleY(1); }
   }
+  @keyframes menuSlideDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
   .anim-fade-up-0 { opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
   .anim-fade-up-1 { opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
@@ -176,6 +180,88 @@ const GLOBAL_CSS = `
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: ${dark}; }
   ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); }
+
+  /* ── Mobile menu ── */
+  .mobile-menu-open {
+    animation: menuSlideDown 0.35s ease forwards;
+  }
+`;
+
+/* ─────────────────────────────────────────
+   RESPONSIVE CSS
+───────────────────────────────────────── */
+const RESPONSIVE_CSS = `
+  /* ── Tablet (≤ 900px) ── */
+  @media (max-width: 900px) {
+    /* Cursor off */
+    #volo-cursor, #volo-ring { display: none !important; }
+
+    /* Section padding */
+    section { padding-left: 24px !important; padding-right: 24px !important; padding-top: 90px !important; padding-bottom: 90px !important; }
+
+    /* Navbar */
+    nav { padding: 16px 24px !important; }
+    .nav-desktop-links { display: none !important; }
+    .nav-desktop-cta   { display: none !important; }
+    .nav-hamburger     { display: flex !important; }
+
+    /* Hero */
+    .hero-content-inner { padding: 0 16px !important; }
+
+    /* Sobre */
+    .sobre-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .sobre-badge { right: 0 !important; bottom: -20px !important; }
+
+    /* Serviços */
+    .servicos-grid-resp { grid-template-columns: 1fr !important; gap: 2px !important; }
+
+    /* Portfolio — empilha tudo em 1 coluna */
+    .portfolio-grid { display: flex !important; flex-direction: column !important; gap: 3px !important; }
+    .portfolio-grid > div { min-height: 220px !important; }
+
+    /* Processo */
+    .processo-steps { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .processo-steps::before { display: none !important; }
+    .processo-steps > div { padding: 0 !important; }
+
+    /* Videos */
+    .video-grid-resp { grid-template-columns: 1fr !important; gap: 48px !important; }
+
+    /* Contato */
+    .contato-grid-resp { grid-template-columns: 1fr !important; gap: 50px !important; }
+    .contato-form-row  { grid-template-columns: 1fr !important; }
+
+    /* Footer */
+    .footer-grid-resp { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .footer-bottom    { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+  }
+
+  /* ── Small mobile (≤ 480px) ── */
+  @media (max-width: 480px) {
+    section { padding-left: 16px !important; padding-right: 16px !important; padding-top: 72px !important; padding-bottom: 72px !important; }
+    nav { padding: 14px 16px !important; }
+
+    /* Hero text scaling */
+    .hero-content-inner h1 { font-size: clamp(2.4rem, 12vw, 4rem) !important; }
+    .hero-content-inner p  { font-size: 0.82rem !important; }
+    .hero-btns { flex-direction: column !important; align-items: center !important; }
+    .hero-btns a { width: 100% !important; text-align: center !important; }
+
+    /* Sobre stat badge */
+    .sobre-badge { position: static !important; margin-top: 16px !important; display: inline-block !important; }
+
+    /* Serviços card padding */
+    .servico-card { padding: 32px 24px !important; }
+
+    /* Processo */
+    .processo-steps { grid-template-columns: 1fr !important; }
+
+    /* Formulário botão */
+    .contato-submit { width: 100% !important; text-align: center !important; }
+
+    /* Footer socials */
+    .footer-bottom { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+  }
 `;
 
 /* ─────────────────────────────────────────
@@ -314,73 +400,196 @@ function CustomCursor() {
 
   return (
     <>
-      <div id="volo-cursor" ref={cursorRef} className="hidden md:block" />
-      <div id="volo-ring" ref={ringRef} className="hidden md:block" />
+      <div id="volo-cursor" ref={cursorRef} />
+      <div id="volo-ring" ref={ringRef} />
     </>
+  );
+}
+
+/* ── Hamburger Icon ── */
+function HamburgerIcon({ open }) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ display: "block" }}>
+      <line
+        x1="3" y1={open ? "12" : "6"} x2="21" y2={open ? "12" : "6"}
+        stroke={gold} strokeWidth="1.5"
+        style={{ transition: "all 0.3s ease", transformOrigin: "center", transform: open ? "rotate(45deg)" : "none" }}
+      />
+      <line
+        x1="3" y1="12" x2="21" y2="12"
+        stroke={gold} strokeWidth="1.5"
+        style={{ transition: "all 0.3s ease", opacity: open ? 0 : 1 }}
+      />
+      <line
+        x1="3" y1={open ? "12" : "18"} x2="21" y2={open ? "12" : "18"}
+        stroke={gold} strokeWidth="1.5"
+        style={{ transition: "all 0.3s ease", transformOrigin: "center", transform: open ? "rotate(-45deg)" : "none" }}
+      />
+    </svg>
   );
 }
 
 /* Navbar */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", h);
     return () => window.removeEventListener("scroll", h);
   }, []);
 
+  // Fecha o menu ao redimensionar para desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth > 900) setMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Bloqueia scroll do body quando menu aberto
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   const links = ["Sobre", "Serviços", "Portfólio", "Processo", "Contato"];
+  const getHref = (l) => `#${l.toLowerCase().replace("ó","o").replace("ç","c").replace("í","i")}`;
+
+  const handleNavClick = (href) => {
+    setMenuOpen(false);
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  };
 
   return (
-    <nav
-      style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        padding: scrolled ? "18px 60px" : "28px 60px",
-        background: scrolled
-          ? "rgba(8,8,8,0.96)"
-          : "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%)",
-        borderBottom: scrolled ? "1px solid rgba(201,168,76,0.12)" : "none",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        transition: "padding 0.4s ease, background 0.4s ease",
-      }}
-    >
-      <a href="#hero" style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "1.25rem", letterSpacing: "0.15em", color: gold, textDecoration: "none" }}>
-        VOLO <span style={{ color: white }}>VISUAL</span>
-      </a>
-
-      <ul style={{ display: "flex", gap: 40, listStyle: "none", margin: 0, padding: 0 }} className="hidden md:flex">
-        {links.map((l) => (
-          <li key={l}>
-            <a
-              href={`#${l.toLowerCase().replace("ó", "o").replace("ç", "c").replace("í", "i")}`}
-              className="nav-link"
-              style={{
-                fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.22em",
-                textTransform: "uppercase", color: gray, textDecoration: "none",
-                position: "relative", transition: "color 0.3s",
-              }}
-            >
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <a
-        href="#contato"
-        className="hidden md:inline-block"
+    <>
+      <nav
         style={{
-          fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.2em",
-          textTransform: "uppercase", color: dark, background: gold,
-          padding: "10px 22px", textDecoration: "none", transition: "background 0.3s",
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 200,
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: scrolled ? "18px 60px" : "28px 60px",
+          background: scrolled || menuOpen
+            ? "rgba(8,8,8,0.98)"
+            : "linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%)",
+          borderBottom: (scrolled || menuOpen) ? "1px solid rgba(201,168,76,0.12)" : "none",
+          backdropFilter: (scrolled || menuOpen) ? "blur(12px)" : "none",
+          transition: "padding 0.4s ease, background 0.4s ease",
         }}
-        onMouseEnter={(e) => (e.target.style.background = goldLight)}
-        onMouseLeave={(e) => (e.target.style.background = gold)}
       >
-        Orçamento
-      </a>
-    </nav>
+        {/* Logo */}
+        <a href="#hero" onClick={() => setMenuOpen(false)} style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "1.1rem", letterSpacing: "0.15em", color: gold, textDecoration: "none", zIndex: 201 }}>
+          VOLO <span style={{ color: white }}>VISUAL</span>
+        </a>
+
+        {/* Desktop links */}
+        <ul className="nav-desktop-links" style={{ display: "flex", gap: 40, listStyle: "none", margin: 0, padding: 0 }}>
+          {links.map((l) => (
+            <li key={l}>
+              <a
+                href={getHref(l)}
+                className="nav-link"
+                style={{
+                  fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.22em",
+                  textTransform: "uppercase", color: gray, textDecoration: "none",
+                  position: "relative", transition: "color 0.3s",
+                }}
+              >
+                {l}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop CTA */}
+        <a
+          href="#contato"
+          className="nav-desktop-cta"
+          style={{
+            fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.2em",
+            textTransform: "uppercase", color: dark, background: gold,
+            padding: "10px 22px", textDecoration: "none", transition: "background 0.3s",
+          }}
+          onMouseEnter={(e) => (e.target.style.background = goldLight)}
+          onMouseLeave={(e) => (e.target.style.background = gold)}
+        >
+          Orçamento
+        </a>
+
+        {/* Hamburger button — visível só no mobile via CSS */}
+        <button
+          className="nav-hamburger"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          style={{
+            display: "none", // CSS override para mobile
+            background: "none", border: "none", padding: 8,
+            alignItems: "center", justifyContent: "center",
+            zIndex: 201,
+          }}
+        >
+          <HamburgerIcon open={menuOpen} />
+        </button>
+      </nav>
+
+      {/* Mobile menu overlay */}
+      {menuOpen && (
+        <div
+          className="mobile-menu-open"
+          style={{
+            position: "fixed", inset: 0, zIndex: 190,
+            background: "rgba(8,8,8,0.98)",
+            backdropFilter: "blur(16px)",
+            display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center",
+            gap: 0,
+          }}
+        >
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, textAlign: "center", width: "100%" }}>
+            {links.map((l, i) => (
+              <li key={l} style={{ borderBottom: "1px solid rgba(201,168,76,0.08)" }}>
+                <a
+                  href={getHref(l)}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(getHref(l)); }}
+                  style={{
+                    display: "block", padding: "22px 40px",
+                    fontFamily: "'Cinzel', serif", fontSize: "1rem", letterSpacing: "0.3em",
+                    textTransform: "uppercase", color: white, textDecoration: "none",
+                    transition: "color 0.3s",
+                    animationDelay: `${i * 0.06}s`,
+                  }}
+                  onMouseEnter={(e) => (e.target.style.color = gold)}
+                  onMouseLeave={(e) => (e.target.style.color = white)}
+                >
+                  {l}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {/* CTA no menu mobile */}
+          <a
+            href="#contato"
+            onClick={(e) => { e.preventDefault(); handleNavClick("#contato"); }}
+            style={{
+              marginTop: 40,
+              fontFamily: "'Cinzel', serif", fontSize: "0.75rem", letterSpacing: "0.25em",
+              textTransform: "uppercase", color: dark, background: gold,
+              padding: "16px 48px", textDecoration: "none",
+            }}
+          >
+            Solicitar Orçamento
+          </a>
+          {/* Contato rápido */}
+          <div style={{ marginTop: 40, textAlign: "center" }}>
+            <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.4em", textTransform: "uppercase", color: gold, marginBottom: 10 }}>Contato Rápido</p>
+            <a href="mailto:contato@volovisual.com" style={{ fontSize: "0.8rem", color: gray, textDecoration: "none", display: "block", marginBottom: 6 }}>contato@volovisual.com</a>
+            <a href="tel:+5541999990000" style={{ fontSize: "0.8rem", color: gray, textDecoration: "none" }}>+55 (41) 99999-0000</a>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -416,16 +625,16 @@ function Hero() {
       </div>
 
       {/* Content */}
-      <div className="hero-content-inner" style={{ position: "relative", textAlign: "center", zIndex: 2, padding: "0 20px" }}>
+      <div className="hero-content-inner" style={{ position: "relative", textAlign: "center", zIndex: 2, padding: "0 20px", width: "100%" }}>
         <p className="anim-fade-up-0" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.5em", textTransform: "uppercase", color: gold, marginBottom: 32 }}>
           Produções Aéreas · Curitiba, Brasil
         </p>
 
-        <h1 className="anim-fade-up-1" style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(3rem, 8vw, 7rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "0.05em", marginBottom: 12 }}>
+        <h1 className="anim-fade-up-1" style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(2.8rem, 10vw, 7rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "0.05em", marginBottom: 12 }}>
           VOLO <span style={{ color: gold }}>VISUAL</span>
         </h1>
 
-        <p className="anim-fade-up-2" style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(1.1rem, 3vw, 2.2rem)", fontWeight: 400, letterSpacing: "0.35em", color: gray, textTransform: "uppercase", marginBottom: 48 }}>
+        <p className="anim-fade-up-2" style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "clamp(0.9rem, 3vw, 2.2rem)", fontWeight: 400, letterSpacing: "0.35em", color: gray, textTransform: "uppercase", marginBottom: 48 }}>
           Cinematografia Aérea
         </p>
 
@@ -433,7 +642,7 @@ function Hero() {
           Capturamos o mundo de perspectivas que nenhum outro equipamento alcança. Filmagem em 4K e 8K com drones de alta performance.
         </p>
 
-        <div className="anim-fade-up-4" style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
+        <div className="anim-fade-up-4 hero-btns" style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap", padding: "0 16px" }}>
           <a href="#portfolio"
             style={{ fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: dark, background: gold, padding: "16px 36px", textDecoration: "none", transition: "all 0.3s", display: "inline-block" }}
             onMouseEnter={(e) => { e.currentTarget.style.background = goldLight; e.currentTarget.style.transform = "translateY(-2px)"; }}
@@ -478,7 +687,7 @@ function SectionLabel({ children, centered }) {
 function SectionTitle({ children, centered, delay }) {
   return (
     <h2 className={`reveal${delay ? ` reveal-delay-${delay}` : ""}`} style={{
-      fontFamily: "'Cinzel', serif", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 600,
+      fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 4vw, 3rem)", fontWeight: 600,
       lineHeight: 1.2, letterSpacing: "0.05em", marginBottom: 24,
       textAlign: centered ? "center" : undefined,
     }}>
@@ -502,10 +711,8 @@ function Sobre() {
         {/* Visual */}
         <div className="reveal" style={{ position: "relative" }}>
           <div style={{ aspectRatio: "4/5", background: dark3, border: "1px solid rgba(201,168,76,0.15)", position: "relative", overflow: "hidden" }}>
-            {/* Corner accents */}
             <div style={{ position: "absolute", top: -1, left: -1, width: 60, height: 60, borderTop: `2px solid ${gold}`, borderLeft: `2px solid ${gold}` }} />
             <div style={{ position: "absolute", bottom: -1, right: -1, width: 60, height: 60, borderBottom: `2px solid ${gold}`, borderRight: `2px solid ${gold}` }} />
-            {/* Drone SVG */}
             <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: 0.12 }}>
               <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
                 <circle cx="100" cy="100" r="16" stroke={gold} strokeWidth="1.5"/>
@@ -520,7 +727,6 @@ function Sobre() {
                 <ellipse cx="100" cy="100" rx="44" ry="44" stroke={gold} strokeWidth="0.5" strokeDasharray="4 4"/>
               </svg>
             </div>
-            {/* Aerial simulation */}
             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" style={{ position: "absolute", inset: 0, opacity: 0.3 }}>
               <defs>
                 <radialGradient id="rg1" cx="40%" cy="60%">
@@ -538,7 +744,7 @@ function Sobre() {
             </svg>
           </div>
           {/* Stat badge */}
-          <div style={{ position: "absolute", bottom: 30, right: -30, background: dark, border: "1px solid rgba(201,168,76,0.2)", padding: "24px 30px" }}>
+          <div className="sobre-badge" style={{ position: "absolute", bottom: 30, right: -30, background: dark, border: "1px solid rgba(201,168,76,0.2)", padding: "24px 30px" }}>
             <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "2.5rem", color: gold, lineHeight: 1 }}>+120</div>
             <div style={{ fontSize: "0.7rem", letterSpacing: "0.1em", color: gray, marginTop: 6 }}>Projetos Realizados</div>
           </div>
@@ -655,7 +861,8 @@ function Portfolio() {
           </a>
         </div>
 
-        <div className="reveal" style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: 3 }}>
+        {/* Grid desktop / lista mobile via classe */}
+        <div className="reveal portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: 3 }}>
           {portfolioItems.map((item, i) => (
             <div key={i} className="portfolio-item"
               style={{ gridColumn: item.col, gridRow: item.row, minHeight: item.minH, position: "relative", overflow: "hidden", background: dark3 }}
@@ -717,25 +924,15 @@ function Processo() {
 }
 
 /* Videos */
-// ══════════════════════════════════════════════════════
-//  COMO USAR:
-//  Substitua as URLs abaixo pelos seus links do YouTube
-//  ou Vimeo. Exemplos:
-//    YouTube: "https://www.youtube.com/embed/SEU_VIDEO_ID"
-//    Vimeo:   "https://player.vimeo.com/video/SEU_VIDEO_ID"
-//
-//  Também troque "Título do Vídeo 1" e "Descrição..." pelo
-//  nome real de cada projeto.
-// ══════════════════════════════════════════════════════
 const videos = [
   {
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // ← troque pela URL do seu vídeo
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     title: "Título do Vídeo 1",
     desc: "Descrição breve do projeto — localização, tipo de produção ou cliente.",
     label: "Produção Aérea",
   },
   {
-    url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // ← troque pela URL do seu vídeo
+    url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     title: "Título do Vídeo 2",
     desc: "Descrição breve do projeto — localização, tipo de produção ou cliente.",
     label: "Cinematografia",
@@ -746,7 +943,6 @@ function Videos() {
   return (
     <section id="depoimentos" style={{ padding: "140px 60px", background: dark2, overflow: "hidden" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 80 }}>
           <SectionLabel centered>Nosso Trabalho</SectionLabel>
           <SectionTitle centered delay={1}>Produções em <span style={{ color: gold }}>Destaque</span></SectionTitle>
@@ -755,43 +951,26 @@ function Videos() {
           </p>
         </div>
 
-        {/* Video grid */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }} className="video-grid-resp">
           {videos.map((v, i) => (
             <div key={i} className={`reveal${i > 0 ? " reveal-delay-1" : ""}`}>
-              {/* Video frame */}
               <div style={{ position: "relative", border: "1px solid rgba(201,168,76,0.15)", background: dark3 }}>
-                {/* Corner accents */}
                 <div style={{ position: "absolute", top: -1, left: -1, width: 28, height: 28, borderTop: `1px solid ${gold}`, borderLeft: `1px solid ${gold}`, zIndex: 2, pointerEvents: "none" }} />
                 <div style={{ position: "absolute", bottom: -1, right: -1, width: 28, height: 28, borderBottom: `1px solid ${gold}`, borderRight: `1px solid ${gold}`, zIndex: 2, pointerEvents: "none" }} />
-
-                {/* 16:9 iframe */}
                 <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden" }}>
                   <iframe
                     src={v.url}
                     title={v.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    style={{
-                      position: "absolute", top: 0, left: 0,
-                      width: "100%", height: "100%",
-                      border: "none",
-                    }}
+                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
                   />
                 </div>
               </div>
-
-              {/* Info below video */}
               <div style={{ padding: "24px 4px 0" }}>
-                <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: 10 }}>
-                  {v.label}
-                </p>
-                <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.1rem", letterSpacing: "0.05em", marginBottom: 10 }}>
-                  {v.title}
-                </h3>
-                <p style={{ fontSize: "0.82rem", color: gray, lineHeight: 1.8 }}>
-                  {v.desc}
-                </p>
+                <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: 10 }}>{v.label}</p>
+                <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.1rem", letterSpacing: "0.05em", marginBottom: 10 }}>{v.title}</h3>
+                <p style={{ fontSize: "0.82rem", color: gray, lineHeight: 1.8 }}>{v.desc}</p>
               </div>
             </div>
           ))}
@@ -846,7 +1025,8 @@ function Contato() {
 
         {/* Form */}
         <form className="reveal reveal-delay-2" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+          {/* Nome + Empresa — empilha no mobile via classe */}
+          <div className="contato-form-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <label style={labelStyle}>Nome</label>
               <input className="volo-input" type="text" placeholder="Seu nome" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} style={inputStyle} />
@@ -871,7 +1051,9 @@ function Contato() {
             <label style={labelStyle}>Mensagem</label>
             <textarea className="volo-input" placeholder="Descreva seu projeto..." value={form.mensagem} onChange={(e) => setForm({ ...form, mensagem: e.target.value })} style={{ ...inputStyle, resize: "none", height: 100 }} />
           </div>
-          <button type="submit"
+          <button
+            type="submit"
+            className="contato-submit"
             style={{
               fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase",
               color: submitted ? white : dark, background: submitted ? "#5a8a5a" : gold,
@@ -893,7 +1075,6 @@ function Footer() {
   const navLinks = ["Sobre", "Serviços", "Portfólio", "Processo", "Contato"];
   const serviceLinks = ["Filmagem com Drone", "Produção Cinematográfica", "Fotografia Aérea", "Mapeamento", "Eventos"];
   const socials = ["IG", "YT", "LI", "VM"];
-
   const linkStyle = { fontSize: "0.8rem", color: gray, textDecoration: "none", transition: "color 0.3s" };
 
   return (
@@ -925,7 +1106,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 30 }}>
+        <div className="footer-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 30 }}>
           <p style={{ fontSize: "0.72rem", color: "rgba(154,150,144,0.5)", letterSpacing: "0.05em" }}>© 2025 Volo Visual. Todos os direitos reservados.</p>
           <div style={{ display: "flex", gap: 16 }}>
             {socials.map(s => (
@@ -941,23 +1122,6 @@ function Footer() {
   );
 }
 
-/* Responsive style block */
-const RESPONSIVE_CSS = `
-  @media (max-width: 900px) {
-    .sobre-grid { grid-template-columns: 1fr !important; gap: 50px !important; }
-    .servicos-grid-resp { grid-template-columns: 1fr !important; }
-    .dep-grid-resp { grid-template-columns: 1fr !important; }
-    .video-grid-resp { grid-template-columns: 1fr !important; }
-    .contato-grid-resp { grid-template-columns: 1fr !important; gap: 50px !important; }
-    .footer-grid-resp { grid-template-columns: 1fr 1fr !important; gap: 30px !important; }
-    .processo-steps { grid-template-columns: 1fr 1fr !important; }
-    .processo-steps::before { display: none; }
-    section { padding-left: 24px !important; padding-right: 24px !important; }
-    nav { padding: 20px 24px !important; }
-    #volo-cursor, #volo-ring { display: none !important; }
-  }
-`;
-
 /* ─────────────────────────────────────────
    ROOT COMPONENT
 ───────────────────────────────────────── */
@@ -965,12 +1129,10 @@ export default function VoloVisual() {
   useReveal();
 
   useEffect(() => {
-    // Inject global styles
     const styleEl = document.createElement("style");
     styleEl.textContent = GLOBAL_CSS + RESPONSIVE_CSS;
     document.head.appendChild(styleEl);
 
-    // Google Fonts
     if (!document.querySelector('link[href*="Cinzel"]')) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
