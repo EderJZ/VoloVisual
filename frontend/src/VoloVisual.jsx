@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import img01 from "./assets/img01.webp";
 
 /* ─────────────────────────────────────────
    DESIGN TOKENS
@@ -712,7 +713,7 @@ function Sobre() {
         <div className="reveal" style={{ position: "relative" }}>
           <div style={{ aspectRatio: "4/5", border: "1px solid rgba(201,168,76,0.15)", position: "relative", overflow: "hidden" }}>
             <img
-              src="/src/assets/img01.webp"
+              src={img01}
               alt="Volo Visual em operação"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
