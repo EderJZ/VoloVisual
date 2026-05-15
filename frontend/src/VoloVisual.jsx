@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import img01 from "./assets/img01.webp";
+import img01 from "./assets/img01.JPG";
+import port01 from "./assets/port01.JPG";
+import port02 from "./assets/port02.JPG";
+import port03 from "./assets/port03.JPG";
+import port04 from "./assets/port04.JPG";
+import port05 from "./assets/port05.JPG";
+import port06 from "./assets/port06.JPG";
 
 /* ─────────────────────────────────────────
    DESIGN TOKENS
@@ -812,12 +818,42 @@ function Servicos() {
 
 /* Portfolio */
 const portfolioItems = [
-  { pat: "radial-gradient(ellipse at 30% 70%, rgba(201,168,76,0.12) 0%, transparent 60%), #0e0e0e", cat: "Produção Imobiliária", name: "Residencial Alto da Serra", col: "span 7", row: "span 2", minH: 460 },
-  { pat: "linear-gradient(135deg, #0d0d0d 0%, #141410 100%)", cat: "Eventos", name: "Festival Cultura Viva", col: "span 5", minH: 220 },
-  { pat: "radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.08) 0%, transparent 60%), #0e0e0e", cat: "Publicidade", name: "Campanha Natureza Viva", col: "span 5", minH: 220 },
-  { pat: "#0d0d0d", cat: "Mapeamento", name: "Levantamento Industrial", col: "span 4", minH: 220 },
-  { pat: "linear-gradient(45deg, #0c0c0c 0%, #131310 100%)", cat: "Casamento", name: "Fazenda Santa Luzia", col: "span 4", minH: 220 },
-  { pat: "radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%), #0e0e0e", cat: "Documentário", name: "Litoral Paranaense", col: "span 4", minH: 220 },
+  {
+    img: port01,
+    cat: "Eventos",
+    name: "Parque de Diversões Noturno",
+    col: "span 7", row: "span 2", minH: 460,
+  },
+  {
+    img: port02,
+    cat: "Mapeamento e Inspeção",
+    name: "Levantamento de Obra",
+    col: "span 5", minH: 220,
+  },
+  {
+    img: port03,
+    cat: "Mapeamento e Inspeção",
+    name: "Construção de Canal",
+    col: "span 5", minH: 220,
+  },
+  {
+    img: port04,
+    cat: "Documentário",
+    name: "Litoral ao Pôr do Sol",
+    col: "span 4", minH: 220,
+  },
+  {
+    img: port05,
+    cat: "Documentário",
+    name: "Cachoeira — Natureza Viva",
+    col: "span 4", minH: 220,
+  },
+  {
+    img: port06,
+    cat: "Fotografia Aérea",
+    name: "Produção Aérea",
+    col: "span 4", minH: 220,
+  },
 ];
 
 function Portfolio() {
@@ -838,13 +874,22 @@ function Portfolio() {
           </a>
         </div>
 
-        {/* Grid desktop / lista mobile via classe */}
+       {/* Grid desktop / lista mobile via classe */}
         <div className="reveal portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(12, 1fr)", gap: 3 }}>
           {portfolioItems.map((item, i) => (
             <div key={i} className="portfolio-item"
               style={{ gridColumn: item.col, gridRow: item.row, minHeight: item.minH, position: "relative", overflow: "hidden", background: dark3 }}
             >
-              <div className="port-bg" style={{ position: "absolute", inset: 0, background: item.pat, transition: "transform 0.6s ease" }} />
+              <div
+                className="port-bg"
+                style={{
+                  position: "absolute", inset: 0,
+                  backgroundImage: item.img ? `url(${item.img})` : item.pat,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  transition: "transform 0.6s ease",
+                }}
+              />
               <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <div className="port-icon" style={{ opacity: 0.06, transition: "opacity 0.4s" }}>
                   <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
