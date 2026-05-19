@@ -706,7 +706,7 @@ function SectionTitle({ children, centered, delay }) {
 /* Sobre */
 function Sobre() {
   const valores = [
-    { n: "01", t: "Precisão", d: "Cada frame é planejado e executado com exatidão milimétrica." },
+    { n: "01", t: "Precisão", d: "Cada frame é planejado e executado com excelência." },
     { n: "02", t: "Criatividade", d: "Perspectivas únicas que contam histórias visuais inesquecíveis." },
     { n: "03", t: "Qualidade", d: "Equipamentos profissionais e entrega em ultra-alta definição." },
     { n: "04", t: "Confiança", d: "Pilotos certificados pela ANAC e seguros em todas as operações." },
