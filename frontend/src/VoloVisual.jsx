@@ -499,7 +499,7 @@ function Navbar() {
                 href={getHref(l)}
                 className="nav-link"
                 style={{
-                  fontFamily: "'Cinzel', serif", fontSize: "0.68rem", letterSpacing: "0.22em",
+                  fontFamily: "'Cinzel', serif", fontSize: "0.85rem", letterSpacing: "0.22em",
                   textTransform: "uppercase", color: gray, textDecoration: "none",
                   position: "relative", transition: "color 0.3s",
                 }}
@@ -515,7 +515,7 @@ function Navbar() {
           href="#contato"
           className="nav-desktop-cta"
           style={{
-            fontFamily: "'Cinzel', serif", fontSize: "0.65rem", letterSpacing: "0.2em",
+            fontFamily: "'Cinzel', serif", fontSize: "0.85rem", letterSpacing: "0.2em",
             textTransform: "uppercase", color: dark, background: gold,
             padding: "10px 22px", textDecoration: "none", transition: "background 0.3s",
           }}
@@ -591,8 +591,8 @@ function Navbar() {
           {/* Contato rápido */}
           <div style={{ marginTop: 40, textAlign: "center" }}>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.55rem", letterSpacing: "0.4em", textTransform: "uppercase", color: gold, marginBottom: 10 }}>Contato Rápido</p>
-            <a href="mailto:contato@volovisual.com" style={{ fontSize: "0.8rem", color: gray, textDecoration: "none", display: "block", marginBottom: 6 }}>contato@volovisual.com</a>
-            <a href="tel:+5541999990000" style={{ fontSize: "0.8rem", color: gray, textDecoration: "none" }}>+55 (41) 99999-0000</a>
+            <a href="mailto:contato@volovisual.com" style={{ fontSize: "0.95rem", color: gray, textDecoration: "none", display: "block", marginBottom: 6 }}>contato@volovisual.com</a>
+            <a href="tel:+5541999990000" style={{ fontSize: "0.95rem", color: gray, textDecoration: "none" }}>+55 (41) 99999-0000</a>
           </div>
         </div>
       )}
@@ -645,7 +645,7 @@ function Hero() {
           Cinematografia Aérea
         </p>
 
-        <p className="anim-fade-up-3" style={{ fontSize: "0.9rem", letterSpacing: "0.08em", color: gray, maxWidth: 460, margin: "0 auto 56px", lineHeight: 1.9 }}>
+        <p className="anim-fade-up-3" style={{ fontSize: "1rem", letterSpacing: "0.08em", color: gray, maxWidth: 460, margin: "0 auto 56px", lineHeight: 1.9 }}>
           Capturamos o mundo de perspectivas que nenhum outro equipamento alcança. Filmagem em 4K e 8K com drones de alta performance.
         </p>
 
@@ -729,7 +729,7 @@ function Sobre() {
           {/* Stat badge */}
           <div className="sobre-badge" style={{ position: "absolute", bottom: 30, right: -30, background: dark, border: "1px solid rgba(201,168,76,0.2)", padding: "24px 30px" }}>
             <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "2.5rem", color: gold, lineHeight: 1 }}></div>
-            <div style={{ fontSize: "0.7rem", letterSpacing: "0.1em", color: gray, marginTop: 6 }}>Projetos Realizados</div>
+            <div style={{ fontSize: "0.85rem", letterSpacing: "0.1em", color: gray, marginTop: 6 }}>Projetos Realizados</div>
           </div>
         </div>
 
@@ -737,10 +737,10 @@ function Sobre() {
         <div>
           <SectionLabel>Nossa História</SectionLabel>
           <SectionTitle delay={1}>Onde Arte e<br/>Tecnologia <span style={{ color: gold }}>Voam</span></SectionTitle>
-          <p className="reveal reveal-delay-2" style={{ fontSize: "0.92rem", lineHeight: 2, color: gray, marginBottom: 20 }}>
+          <p className="reveal reveal-delay-2" style={{ fontSize: "1rem", lineHeight: 2, color: gray, marginBottom: 20 }}>
             A Volo Visual nasceu da paixão por capturar o mundo de perspectivas impossíveis. Unimos tecnologia de ponta com sensibilidade cinematográfica para criar imagens que transcendem o ordinário.
           </p>
-          <p className="reveal reveal-delay-3" style={{ fontSize: "0.92rem", lineHeight: 2, color: gray, marginBottom: 48 }}>
+          <p className="reveal reveal-delay-3" style={{ fontSize: "1rem", lineHeight: 2, color: gray, marginBottom: 48 }}>
             Nossa equipe de pilotos certificados e cinegrafistas profissionais domina cada detalhe da captação aérea — do planejamento de voo à entrega final em 4K ou 8K.
           </p>
 
@@ -753,7 +753,7 @@ function Sobre() {
               >
                 <div style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "1.5rem", color: gold, opacity: 0.6, marginBottom: 6 }}>{v.n}</div>
                 <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 8 }}>{v.t}</div>
-                <div style={{ fontSize: "0.78rem", color: gray, lineHeight: 1.7 }}>{v.d}</div>
+                <div style={{ fontSize: "0.95rem", color: gray, lineHeight: 1.7 }}>{v.d}</div>
               </div>
             ))}
           </div>
@@ -801,7 +801,7 @@ function Servicos() {
               <div style={{ position: "absolute", top: 40, right: 36, fontFamily: "'Cinzel Decorative', serif", fontSize: "3.5rem", color: "rgba(201,168,76,0.06)", lineHeight: 1 }}>{s.n}</div>
               <div style={{ marginBottom: 32, opacity: 0.7 }}><s.Icon /></div>
               <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.1rem", letterSpacing: "0.05em", marginBottom: 16 }}>{s.title}</h3>
-              <p style={{ fontSize: "0.82rem", color: gray, lineHeight: 1.9, marginBottom: 32 }}>{s.desc}</p>
+              <p style={{ fontSize: "0.95rem", color: gray, lineHeight: 1.9, marginBottom: 32 }}>{s.desc}</p>
               <a href="#contato" style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: gold, textDecoration: "none", display: "flex", alignItems: "center", gap: 10, transition: "gap 0.3s" }}
                 onMouseEnter={(e) => e.currentTarget.style.gap = "16px"}
                 onMouseLeave={(e) => e.currentTarget.style.gap = "10px"}
@@ -902,7 +902,7 @@ function Portfolio() {
               </div>
               <div className="port-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%)", opacity: 0, transition: "opacity 0.4s" }} />
               <div className="port-info" style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: 32, transform: "translateY(10px)", opacity: 0, transition: "all 0.4s" }}>
-                <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.58rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: 8 }}>{item.cat}</p>
+                <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: 8 }}>{item.cat}</p>
                 <p style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", letterSpacing: "0.08em" }}>{item.name}</p>
               </div>
             </div>
@@ -936,7 +936,7 @@ function Processo() {
                 {s.n}
               </div>
               <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", letterSpacing: "0.1em", marginBottom: 14 }}>{s.t}</h3>
-              <p style={{ fontSize: "0.8rem", color: gray, lineHeight: 1.9 }}>{s.d}</p>
+              <p style={{ fontSize: "0.95rem", color: gray, lineHeight: 1.9 }}>{s.d}</p>
             </div>
           ))}
         </div>
@@ -968,7 +968,7 @@ function Videos() {
         <div style={{ textAlign: "center", marginBottom: 80 }}>
           <SectionLabel centered>Nosso Trabalho</SectionLabel>
           <SectionTitle centered delay={1}>Produções em <span style={{ color: gold }}>Destaque</span></SectionTitle>
-          <p className="reveal reveal-delay-2" style={{ fontSize: "0.88rem", color: gray, lineHeight: 1.9, maxWidth: 480, margin: "0 auto" }}>
+          <p className="reveal reveal-delay-2" style={{ fontSize: "1rem", color: gray, lineHeight: 1.9, maxWidth: 480, margin: "0 auto" }}>
             Veja como transformamos visões em produções cinematográficas aéreas únicas.
           </p>
         </div>
@@ -992,7 +992,7 @@ function Videos() {
               <div style={{ padding: "24px 4px 0" }}>
                 <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: 10 }}>{v.label}</p>
                 <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.1rem", letterSpacing: "0.05em", marginBottom: 10 }}>{v.title}</h3>
-                <p style={{ fontSize: "0.82rem", color: gray, lineHeight: 1.8 }}>{v.desc}</p>
+                <p style={{ fontSize: "0.95rem", color: gray, lineHeight: 1.8 }}>{v.desc}</p>
               </div>
             </div>
           ))}
@@ -1041,7 +1041,7 @@ ${form.mensagem}
   };
 
   const inputStyle = { background: "transparent", border: "none", borderBottom: "1px solid rgba(201,168,76,0.2)", padding: "12px 0", fontFamily: "'Montserrat', sans-serif", fontSize: "0.88rem", color: white, outline: "none", transition: "border-color 0.3s", fontWeight: 300, width: "100%" };
-  const labelStyle = { fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: gray };
+  const labelStyle = { fontFamily: "'Cinzel', serif", fontSize: "0.75rem", letterSpacing: "0.25em", textTransform: "uppercase", color: gray };
 
   const contactInfos = [
     { label: "E-mail", value: "carlosvzm@gmail.com", icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3h12v10H3z" stroke={gold} strokeWidth="1"/><path d="M3 3l6 5 6-5" stroke={gold} strokeWidth="1"/></svg> },
@@ -1056,7 +1056,7 @@ ${form.mensagem}
         <div>
           <SectionLabel>Fale Conosco</SectionLabel>
           <SectionTitle delay={1}>Vamos Criar <span style={{ color: gold }}>Juntos</span></SectionTitle>
-          <p className="reveal reveal-delay-2" style={{ fontSize: "0.9rem", color: gray, lineHeight: 2, marginBottom: 40 }}>
+          <p className="reveal reveal-delay-2" style={{ fontSize: "1rem", color: gray, lineHeight: 2, marginBottom: 40 }}>
             Conte-nos sobre seu projeto. Nossa equipe responde em até 24 horas úteis com uma proposta personalizada.
           </p>
           <div className="reveal reveal-delay-3" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -1178,7 +1178,7 @@ function Footer() {
   const navLinks = ["Sobre", "Serviços", "Portfólio", "Processo", "Contato"];
   const serviceLinks = ["Filmagem com Drone", "Produção Cinematográfica", "Fotografia Aérea", "Mapeamento", "Eventos"];
   const socials = ["IG", "YT", "LI", "VM"];
-  const linkStyle = { fontSize: "0.8rem", color: gray, textDecoration: "none", transition: "color 0.3s" };
+  const linkStyle = { fontSize: "0.95rem", color: gray, textDecoration: "none", transition: "color 0.3s" };
 
   return (
     <footer style={{ background: dark2, borderTop: "1px solid rgba(201,168,76,0.1)", padding: "60px 60px 40px" }}>
@@ -1186,7 +1186,7 @@ function Footer() {
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 60, paddingBottom: 50, borderBottom: "1px solid rgba(255,255,255,0.06)" }} className="footer-grid-resp">
           <div>
             <span style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: "1.3rem", color: gold, marginBottom: 16, display: "block" }}>VOLO VISUAL</span>
-            <p style={{ fontSize: "0.8rem", color: gray, lineHeight: 1.9 }}>Produções audiovisuais aéreas com excelência técnica e visão artística. Capturamos o mundo de perspectivas que nenhum outro equipamento alcança.</p>
+            <p style={{ fontSize: "0.95rem", color: gray, lineHeight: 1.9 }}>Produções audiovisuais aéreas com excelência técnica e visão artística. Capturamos o mundo de perspectivas que nenhum outro equipamento alcança.</p>
           </div>
           <div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: gold, marginBottom: 20 }}>Navegação</p>
@@ -1210,7 +1210,7 @@ function Footer() {
           </div>
         </div>
         <div className="footer-bottom" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: 30 }}>
-          <p style={{ fontSize: "0.72rem", color: "rgba(154,150,144,0.5)", letterSpacing: "0.05em" }}>© 2025 Volo Visual. Todos os direitos reservados.</p>
+          <p style={{ fontSize: "0.85rem", color: "rgba(154,150,144,0.5)", letterSpacing: "0.05em" }}>© 2025 Volo Visual. Todos os direitos reservados.</p>
           <div style={{ display: "flex", gap: 16 }}>
             {socials.map(s => (
               <a key={s} href="#" style={{ width: 36, height: 36, border: "1px solid rgba(201,168,76,0.15)", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", color: gray, fontSize: "0.75rem", fontFamily: "'Cinzel', serif", transition: "all 0.3s" }}
