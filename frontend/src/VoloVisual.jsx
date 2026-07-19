@@ -1764,8 +1764,8 @@ function Processo() {
 const videos = [
   {
     url: "https://www.youtube.com/embed/iTvm2TfdZZU",
-    title: "Título do Vídeo 1",
-    desc: "Descrição breve do projeto — localização, tipo de produção ou cliente.",
+    title: "PCH - Pequena Central Hidrelétrica",
+    desc: "Produção audiovisual aérea realizada para uma Pequena Central Hidrelétrica (PCH), destacando a estrutura da usina, o aproveitamento dos recursos hídricos e os processos de geração de energia renovável por meio de imagens captadas com drone.",
     label: "Produção Aérea",
   },
   {
