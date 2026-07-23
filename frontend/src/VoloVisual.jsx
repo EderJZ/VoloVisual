@@ -633,25 +633,52 @@ function Navbar() {
         </ul>
 
         {/* Desktop CTA */}
-        <a
-          href="#contato"
-          className="nav-desktop-cta"
-          style={{
-            fontFamily: "'Cinzel', serif",
-            fontSize: "0.85rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: dark,
-            background: gold,
-            padding: "10px 22px",
-            textDecoration: "none",
-            transition: "background 0.3s",
-          }}
-          onMouseEnter={(e) => (e.target.style.background = goldLight)}
-          onMouseLeave={(e) => (e.target.style.background = gold)}
-        >
-          Orçamento
-        </a>
+        <div className="nav-desktop-cta" style={{ display: "flex", gap: 12 }}>
+          <a
+            href="https://manager.volovisual.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.85rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: gold,
+              border: "1px solid rgba(201,168,76,0.4)",
+              padding: "10px 22px",
+              textDecoration: "none",
+              transition: "all 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = gold;
+              e.currentTarget.style.background = "rgba(201,168,76,0.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(201,168,76,0.4)";
+              e.currentTarget.style.background = "";
+            }}
+          >
+            Área do Cliente
+          </a>
+          <a
+            href="#contato"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.85rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: dark,
+              background: gold,
+              padding: "10px 22px",
+              textDecoration: "none",
+              transition: "background 0.3s",
+            }}
+            onMouseEnter={(e) => (e.target.style.background = goldLight)}
+            onMouseLeave={(e) => (e.target.style.background = gold)}
+          >
+            Orçamento
+          </a>
+        </div>
 
         {/* Hamburger button — visível só no mobile via CSS */}
         <button
@@ -659,7 +686,7 @@ function Navbar() {
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           style={{
-            display: "none", // CSS override para mobile
+            display: "none",
             background: "none",
             border: "none",
             padding: 8,
@@ -729,27 +756,56 @@ function Navbar() {
               </li>
             ))}
           </ul>
-          {/* CTA no menu mobile */}
-          <a
-            href="#contato"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("#contato");
-            }}
+
+          {/* CTAs no menu mobile */}
+          <div
             style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 16,
               marginTop: 40,
-              fontFamily: "'Cinzel', serif",
-              fontSize: "0.75rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: dark,
-              background: gold,
-              padding: "16px 48px",
-              textDecoration: "none",
             }}
           >
-            Solicitar Orçamento
-          </a>
+            <a
+              href="https://www.manager.volovisual.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: "'Cinzel', serif",
+                fontSize: "0.75rem",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: gold,
+                border: "1px solid rgba(201,168,76,0.4)",
+                padding: "16px 48px",
+                textDecoration: "none",
+                transition: "all 0.3s",
+              }}
+            >
+              Área do Cliente
+            </a>
+            <a
+              href="#contato"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick("#contato");
+              }}
+              style={{
+                fontFamily: "'Cinzel', serif",
+                fontSize: "0.75rem",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: dark,
+                background: gold,
+                padding: "16px 48px",
+                textDecoration: "none",
+              }}
+            >
+              Solicitar Orçamento
+            </a>
+          </div>
+
           {/* Contato rápido */}
           <div style={{ marginTop: 40, textAlign: "center" }}>
             <p
