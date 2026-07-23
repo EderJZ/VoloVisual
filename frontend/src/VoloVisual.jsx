@@ -1769,10 +1769,10 @@ const videos = [
     label: "Produção Aérea",
   },
   {
-    url: "https://www.youtube.com/embed/iTvm2TfdZZU",
-    title: "Título do Vídeo 2",
-    desc: "Descrição breve do projeto — localização, tipo de produção ou cliente.",
-    label: "Cinematografia",
+    url: "https://www.youtube.com/embed/KOGK6MUR2vg",
+    title: "Acompanhamento de Obra",
+    desc: "Filmagem aérea de edifício em construção em Curitiba — visão completa de cada etapa da obra com drone.",
+    label: "Construção Civil",
   },
 ];
 
