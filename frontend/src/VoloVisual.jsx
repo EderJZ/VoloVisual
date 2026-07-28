@@ -768,7 +768,7 @@ function Navbar() {
             }}
           >
             <a
-              href="https://www.manager.volovisual.com.br"
+              href="https://manager.volovisual.com.br"
               target="_blank"
               rel="noopener noreferrer"
               style={{
