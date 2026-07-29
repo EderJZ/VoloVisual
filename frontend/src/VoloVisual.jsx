@@ -6,6 +6,7 @@ import port03 from "./assets/port03.JPG";
 import port04 from "./assets/port04.JPG";
 import port05 from "./assets/port05.JPG";
 import port06 from "./assets/port06.JPG";
+import heroVideo from "./assets/hero-video.mp4";
 
 /* ─────────────────────────────────────────
    DESIGN TOKENS
@@ -1163,16 +1164,129 @@ function Sobre() {
               overflow: "hidden",
             }}
           >
-            <img
-              src={img01}
-              alt="Volo Visual em operação"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
-            />
+            {(() => {
+              const [muted, setMuted] = useState(true);
+              const videoRef = useRef(null);
+
+              const toggleMute = () => {
+                setMuted((v) => {
+                  if (videoRef.current) videoRef.current.muted = !v;
+                  return !v;
+                });
+              };
+
+              return (
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <video
+                    ref={videoRef}
+                    src={heroVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      display: "block",
+                    }}
+                  />
+                  <button
+                    onClick={toggleMute}
+                    title={muted ? "Ativar som" : "Mutar"}
+                    style={{
+                      position: "absolute",
+                      bottom: 16,
+                      left: 16,
+                      background: "rgba(0,0,0,0.6)",
+                      border: `1px solid rgba(201,168,76,0.4)`,
+                      borderRadius: "50%",
+                      width: 40,
+                      height: 40,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      transition: "all 0.3s",
+                      zIndex: 10,
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.borderColor = gold)
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.borderColor =
+                        "rgba(201,168,76,0.4)")
+                    }
+                  >
+                    {muted ? (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M11 5L6 9H2v6h4l5 4V5z"
+                          stroke={gold}
+                          strokeWidth="1.5"
+                          strokeLinejoin="round"
+                        />
+                        <line
+                          x1="23"
+                          y1="9"
+                          x2="17"
+                          y2="15"
+                          stroke={gold}
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                        <line
+                          x1="17"
+                          y1="9"
+                          x2="23"
+                          y2="15"
+                          stroke={gold}
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M11 5L6 9H2v6h4l5 4V5z"
+                          stroke={gold}
+                          strokeWidth="1.5"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M19.07 4.93a10 10 0 0 1 0 14.14"
+                          stroke={gold}
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M15.54 8.46a5 5 0 0 1 0 7.07"
+                          stroke={gold}
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              );
+            })()}
             <div
               style={{
                 position: "absolute",
